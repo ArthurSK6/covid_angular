@@ -1,0 +1,25 @@
+<ul>
+    <li *ngFor="let b of centers">
+        <button routerLink="/center/detail/{{b.id}}">{{b.name}}</button>
+    </li>
+</ul>
+
+
+<div *ngIf="selected">
+    <h2 [title]="selected.name">{{selected.name | uppercase}}</h2>
+    <div>
+        {{selected.address}} <span>{{selected.postalCode}} {{selected.city}}</span>
+        {{selected.openinDate | date:"fullDate"}}
+    </div>
+</div>
+
+<!-- 
+[center]="selected"
+-->
+
+<app-vaccination-center 
+    (deleted)="onDelete($event)">
+</app-vaccination-center>
+
+
+
