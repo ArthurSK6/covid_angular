@@ -1,25 +1,37 @@
-<ul>
-    <li *ngFor="let b of centers">
-        <button routerLink="/center/detail/{{b.id}}">{{b.name}}</button>
-    </li>
-</ul>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Liste de centre de vaccination</h1>
+            <button class="login-button" routerLink="/login">Login</button>
+        </div>
+    </header>
+    <main>
+        <ul>
+            <li *ngFor="let b of centers">
+                <button routerLink="/center/detail/{{b.id}}">{{b.name}}</button>
+            </li>
+        </ul>
 
+        <div *ngIf="selected">
+            <h2 [title]="selected.name">{{selected.name | uppercase}}</h2>
+            <div>
+                {{selected.address}} <span>{{selected.postalCode}} {{selected.city}}</span>
+                {{selected.openinDate | date:"fullDate"}}
+            </div>
+        </div>
+        
+        <!-- 
+        [center]="selected"
+        -->
+        
+        <app-vaccination-center 
+            (deleted)="onDelete($event)">
+        </app-vaccination-center>
+        
+        <!-- Contenu de la page -->
+    </main>
+</body>
 
-<div *ngIf="selected">
-    <h2 [title]="selected.name">{{selected.name | uppercase}}</h2>
-    <div>
-        {{selected.address}} <span>{{selected.postalCode}} {{selected.city}}</span>
-        {{selected.openinDate | date:"fullDate"}}
-    </div>
-</div>
-
-<!-- 
-[center]="selected"
--->
-
-<app-vaccination-center 
-    (deleted)="onDelete($event)">
-</app-vaccination-center>
 
 
 

@@ -29,4 +29,9 @@ export class VaccinationCenterListComponent implements OnInit {
     delete this.selected;
     this.centers.splice(this.centers.indexOf(aCenter),1);
   }
+
+  login() : void {
+    
+  }
+
 }

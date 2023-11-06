@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { VaccinationCenterListComponent } from './vaccination-center-list/vaccination-center-list.component';
 import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SecondComponent } from './second/second.component';
     VaccinationCenterComponent,
     VaccinationCenterListComponent,
     FirstComponent,
-    SecondComponent
+    SecondComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
