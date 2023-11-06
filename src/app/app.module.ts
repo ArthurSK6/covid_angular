@@ -9,13 +9,15 @@ import { VaccinationCenterComponent } from './vaccination-center/vaccination-cen
 import { FormsModule } from '@angular/forms';
 import { VaccinationCenterListComponent } from './vaccination-center-list/vaccination-center-list.component';
 import { LoginComponent } from './login/login.component';
+import { VaccinationCenterListPrivateComponent } from './vaccination-center-list-private/vaccination-center-list-private.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VaccinationCenterComponent,
     VaccinationCenterListComponent,
-    LoginComponent
+    LoginComponent,
+    VaccinationCenterListPrivateComponent
   ],
   imports: [
     BrowserModule,
