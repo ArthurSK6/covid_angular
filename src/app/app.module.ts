@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { VaccinationCenterComponent } from './vaccination-center/vaccination-center.component';
 import { FormsModule } from '@angular/forms';
 import { VaccinationCenterListComponent } from './vaccination-center-list/vaccination-center-list.component';
-import { FirstComponent } from './first/first.component';
-import { SecondComponent } from './second/second.component';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
@@ -17,8 +15,6 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     VaccinationCenterComponent,
     VaccinationCenterListComponent,
-    FirstComponent,
-    SecondComponent,
     LoginComponent
   ],
   imports: [
