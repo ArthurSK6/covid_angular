@@ -1,3 +1,11 @@
+#Lien vers le back
+https://github.com/ArthurSK6/covid-java-spring-boot
+
+#Projet réalisé par :
+Nicolas KIEGER
+Arthur HURDEBOURG
+
+
 # VaccinationApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
