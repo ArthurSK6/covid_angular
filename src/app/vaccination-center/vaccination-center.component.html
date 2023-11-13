@@ -1,14 +1,24 @@
-<div *ngIf="center">
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Liste de centre de vaccination</h1>
+            <button class="login-button" routerLink="/public/login">Login</button>
+        </div>
+    </header>
+    <main>
 
-    <div class ="banner">
-        <h2 class ="title" [title]="center.name">{{center.name}}</h2>
-    </div>
-        <div>{{center.address}} <span>{{center.postalCode}} {{center.city}}</span></div>
-    
-    <button (click)="clearName()">Clear name</button>
-    <button (click)="delete()">Supprimer</button>
-    
-    <input [(ngModel)]="center.name">
+        <div *ngIf="center">
 
-</div>
+            <div class ="banner">
+                <h2 class ="title" [title]="center.name">{{center.name}}</h2>
+            </div>
+                <div>{{center.address}} <span>{{center.postalCode}} {{center.city}}</span></div>
+            
+            <button (click)="clearName()">Clear name</button>
+            <button (click)="delete()">Supprimer</button>
+            
+            <input [(ngModel)]="center.name">
 
+        </div>
+    </main>
+</body>
