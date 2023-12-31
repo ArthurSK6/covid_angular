@@ -1,6 +1,41 @@
-ul {
-    position: fixed;
-    padding-left: 1%;
-    top: 9%;
-    left: 0%;
-}
+.center-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 400px; /* Ajustez la largeur maximale selon vos besoins */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .center-header {
+    font-size: 1.4em;
+    margin-bottom: 8px;
+  }
+  
+  .center-info {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .select-button {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    width: 100%; /* Ajustez la largeur pour occuper toute la largeur de la carte */
+  }
+  
+  
+  .selected {
+    background-color: #e0e0e0;
+  }
+
+  .center-search-bar {
+    text-align: center;
+  }
+  

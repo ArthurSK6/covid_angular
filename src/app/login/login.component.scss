@@ -1,14 +1,11 @@
-mat-card {
-    background: rgb(232, 232, 236);
-    position: fixed;
-    padding-left: 1%;
-    top: 9%;
-    left: 10%;
-}
-
-.button-submit {
-    background: rgb(196, 198, 199);
-    left: 60%;
-    border: solid 2px;
-    border-color: rgb(0, 0, 0);
-}
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh; /* Cela assure que le formulaire est centré verticalement sur la page */
+  }
+  
+  form {
+    width: 300px; /* Ajustez la largeur selon vos besoins */
+  }
+  

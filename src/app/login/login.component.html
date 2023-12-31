@@ -1,74 +1,19 @@
-
 <body>
-  <header>
-    <div class="header-content">
-        <h1>Connexion à votre compte</h1>
-    </div>
-  </header>
-    <main>
-      <mat-card >
-        <h2> Connexion </h2>
-        <mat-card-content>
-          <form ngNoForm [action]="url" method="POST" >
-            <p>
-              <mat-form-field>
-                <input type="text" placeholder="Nom utilisateur" formControlName="username">
-              </mat-form-field>
-            </p>
-            <p>
-              <mat-form-field>
-                <input type="password" matInput placeholder="Mot de passe" formControlName="password">
-              </mat-form-field>
-            </p>
-
-            <div>
-              <button class="button-submit" type="submit" mat-button>Login</button>
-            </div>
-        </form>
-        </mat-card-content>
-      </mat-card>
-
-
-
-    <!--
-    <mat-card>
-        <mat-card-title>Login</mat-card-title>
-    <mat-card-content>
-        <form >
-          <p>
-            <mat-form-field>
-              <input type="text" matInput placeholder="Username" formControlName="username">
-            </mat-form-field>
-          </p>
-
-          <p>
-            <mat-form-field>
-              <input type="password" matInput placeholder="Password" formControlName="password">
-            </mat-form-field>
-          </p>
-
-          
-
-          <div class="">
-            <button type="submit" mat-button>Login</button>
-          </div>
-
-        </form>
-      </mat-card-content>
-    </mat-card>
-
-  -->
-
-
-
-
-
-
-
-
-        
-        <!-- Contenu de la page -->
-    </main>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email" />
+        </mat-form-field>
+      
+        <br /> <!-- Ajout d'un retour à la ligne -->
+      
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password" />
+        </mat-form-field>
+      
+        <br /> <!-- Ajout d'un retour à la ligne -->
+      
+        <button mat-raised-button color="primary" type="submit">Login</button>
+    </form>
 </body>
 
 

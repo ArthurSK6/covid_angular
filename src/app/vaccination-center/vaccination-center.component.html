@@ -1,24 +1,34 @@
-<body>
-    <header>
-        <div class="header-content">
-            <h1>Liste de centre de vaccination</h1>
-            <button class="login-button" routerLink="/public/login">Login</button>
-        </div>
-    </header>
-    <main>
+<mat-card *ngIf="center">
+  <h2>Rendez-vous pour {{ center.name }}</h2>
+  <form (ngSubmit)="submitForm()" class="form-container">
+    <div class="form-field-container">
+      <div class="form-field">
+        <label for="appointmentDate">Date du rendez-vous: </label>
+        <input type="date" id="appointmentDate" [(ngModel)]="appointmentDate" required />
+      </div>
 
-        <div *ngIf="center">
+      <div class="form-field">
+        <label for="email">Email: </label>
+        <input type="email" id="email" [(ngModel)]="email" required />
+      </div>
 
-            <div class ="banner">
-                <h2 class ="title" [title]="center.name">{{center.name}}</h2>
-            </div>
-                <div>{{center.address}} <span>{{center.postalCode}} {{center.city}}</span></div>
-            
-            <button (click)="clearName()">Clear name</button>
-            <button (click)="delete()">Supprimer</button>
-            
-            <input [(ngModel)]="center.name">
+      <div class="form-field">
+        <label for="phone">Téléphone: </label>
+        <input type="tel" id="phone" [(ngModel)]="phone" required />
+      </div>
 
-        </div>
-    </main>
-</body>
+      <div class="form-field">
+        <label for="firstName">Prénom: </label>
+        <input type="text" id="firstName" [(ngModel)]="firstName" required />
+      </div>
+
+      <div class="form-field">
+        <label for="lastName">Nom: </label>
+        <input type="text" id="lastName" [(ngModel)]="lastName" required />
+      </div>
+    </div>
+
+    <button mat-raised-button type="submit">Prendre rendez-vous</button>
+    
+  </form>
+</mat-card>
