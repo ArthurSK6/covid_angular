@@ -1,14 +1,34 @@
-<div *ngIf="center">
+<mat-card *ngIf="center">
+  <h2>Rendez-vous pour {{ center.name }}</h2>
+  <form (ngSubmit)="submitForm()" class="form-container">
+    <div class="form-field-container">
+      <div class="form-field">
+        <label for="appointmentDate">Date du rendez-vous: </label>
+        <input type="date" id="appointmentDate" [(ngModel)]="appointmentDate" required />
+      </div>
 
-    <div class ="banner">
-        <h2 class ="title" [title]="center.name">{{center.name}}</h2>
+      <div class="form-field">
+        <label for="email">Email: </label>
+        <input type="email" id="email" [(ngModel)]="email" required />
+      </div>
+
+      <div class="form-field">
+        <label for="phone">Téléphone: </label>
+        <input type="tel" id="phone" [(ngModel)]="phone" required />
+      </div>
+
+      <div class="form-field">
+        <label for="firstName">Prénom: </label>
+        <input type="text" id="firstName" [(ngModel)]="firstName" required />
+      </div>
+
+      <div class="form-field">
+        <label for="lastName">Nom: </label>
+        <input type="text" id="lastName" [(ngModel)]="lastName" required />
+      </div>
     </div>
-        <div>{{center.address}} <span>{{center.postalCode}} {{center.city}}</span></div>
-    
-    <button (click)="clearName()">Clear name</button>
-    <button (click)="delete()">Supprimer</button>
-    
-    <input [(ngModel)]="center.name">
 
-</div>
-
+    <button mat-raised-button type="submit">Prendre rendez-vous</button>
+    
+  </form>
+</mat-card>

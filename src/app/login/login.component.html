@@ -1,13 +1,19 @@
 <body>
-    <header>
-        <div class="header-content">
-            <h1>Connexion à votre compre</h1>
-        </div>
-    </header>
-    <main>
-        
-        <!-- Contenu de la page -->
-    </main>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email" />
+        </mat-form-field>
+      
+        <br /> <!-- Ajout d'un retour à la ligne -->
+      
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password" />
+        </mat-form-field>
+      
+        <br /> <!-- Ajout d'un retour à la ligne -->
+      
+        <button mat-raised-button color="primary" type="submit">Login</button>
+    </form>
 </body>
 
 

@@ -1,11 +1,15 @@
+import { User } from './user';
+
 export interface VaccinationCenter{
     id: number;
     name: string;
-    address: string;
     postalCode: string;
+    address: string;
     city: string;
-    openinDate: Date;
+    users: User[];
 }
+
+
 /*
 export interface Observable{
     id: number;

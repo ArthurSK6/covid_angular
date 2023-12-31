@@ -1,37 +1,18 @@
-<body>
-    <header>
-        <div class="header-content">
-            <h1>Liste de centre de vaccination</h1>
-            <button class="login-button" routerLink="/login">Login</button>
-        </div>
-    </header>
-    <main>
-        <ul>
-            <li *ngFor="let b of centers">
-                <button routerLink="/center/detail/{{b.id}}">{{b.name}}</button>
-            </li>
-        </ul>
+<mat-card>
+  <h2>Rechercher votre centre favori :</h2>
+  <app-search-bar class="center-search-bar" (search)="handleSearch($event)"></app-search-bar>
 
-        <div *ngIf="selected">
-            <h2 [title]="selected.name">{{selected.name | uppercase}}</h2>
-            <div>
-                {{selected.address}} <span>{{selected.postalCode}} {{selected.city}}</span>
-                {{selected.openinDate | date:"fullDate"}}
-            </div>
-        </div>
-        
-        <!-- 
-        [center]="selected"
-        -->
-        
-        <app-vaccination-center 
-            (deleted)="onDelete($event)">
-        </app-vaccination-center>
-        
-        <!-- Contenu de la page -->
-    </main>
-</body>
-
-
-
-
+  <div *ngIf="centers.length > 0">
+    <h2>Liste des centres de vaccination disponibles :</h2>
+    <div *ngFor="let aCenter of centers" class="center-card" [ngClass]="{'selected': selected == aCenter}">
+      <div class="center-header">
+        <strong>{{ aCenter.name }}</strong>
+      </div>
+      <div class="center-info">{{ aCenter.address }}, {{ aCenter.postalCode }} {{ aCenter.city }}</div>
+      <a mat-icon-button class="select-button" [routerLink]="'/center/detail/' + aCenter.id">
+        Sélectionner {{aCenter.name}}
+      </a>
+    
+    </div>
+  </div>
+</mat-card>

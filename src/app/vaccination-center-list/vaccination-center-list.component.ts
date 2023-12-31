@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { VaccinationCenter } from '../vaccination-center';
-import { VaccinationService } from '../vaccination.service';
+import { VaccinationCenter } from '../model/vaccination-center';
+import { VaccinationService } from '../services/vaccination.service';
+
 
 @Component({
   selector: 'app-vaccination-center-list',
@@ -10,28 +11,23 @@ import { VaccinationService } from '../vaccination.service';
 export class VaccinationCenterListComponent implements OnInit {
 
   centers!: VaccinationCenter[];
-
   selected?: VaccinationCenter;
+  citySearch: string = "";
 
   constructor(private service: VaccinationService) { }
-    
-  ngOnInit(): void{
-    this.service.getAllVaccinationCenter().subscribe(resultCenters=>{
+
+  ngOnInit(): void {
+    this.service.getAllVaccinationCenters().subscribe(resultCenters => {
       this.centers = resultCenters;
     });
   }
 
-  selectCenter(aCenter: VaccinationCenter) : void{
+  selectCenter(aCenter: VaccinationCenter): void {
     this.selected = aCenter;
   }
 
-  onDelete(aCenter: VaccinationCenter): void {
-    delete this.selected;
-    this.centers.splice(this.centers.indexOf(aCenter),1);
+  handleSearch(event: VaccinationCenter[]){
+    this.centers = event;
   }
-
-  login() : void {
-    
-  }
-
+  
 }
