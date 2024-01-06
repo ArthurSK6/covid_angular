@@ -1,53 +1,24 @@
-<h2>Liste des centres de vaccination</h2>
+<div>
+    <mat-grid-list cols="3" rowHeight="40px">
+        <!-- Recherche et ajout d'un centre -->
+        <mat-grid-tile [colspan]="3" [rowspan]="2">
+            <app-search-bar class="center-search-bar" (search)="handleSearch($event)"></app-search-bar>
+            <button mat-raised-button color="primary" [routerLink]="'/superadmin/centre/0'">Nouveau <mat-icon>add</mat-icon></button>
+        </mat-grid-tile>
 
-<app-search-bar (search)="handleSearch($event)"></app-search-bar>
-
-
-<div *ngIf="searchedCenters.length > 0">
-    <li *ngFor="let aCenter of searchedCenters"
-    [ngClass]="selected==aCenter ? 'selected' : ''">
-    <button
-        (click)="selectCenter(aCenter)">
-        {{aCenter.name}}, {{aCenter.address}}, {{aCenter.city}}
-    </button>  
-    <button (click)="deleteVaccinationCenter(aCenter)">Effacer</button> 
-</li>
+        <!-- Liste des centres -->
+        <div *ngIf="centers.length > 0">
+            <div *ngFor="let aCenter of centers" [ngClass]="{'selected': selected == aCenter}">
+                <mat-grid-tile [colspan]="1" [rowspan]="4">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>{{ aCenter.name }}</mat-card-title>
+                            <mat-card-subtitle>{{ aCenter.address }}, {{ aCenter.postalCode }} {{ aCenter.city }}</mat-card-subtitle>
+                            <button mat-icon-button aria-label="Modifier Centre" [routerLink]="'/superadmin/centre/' + aCenter.id"><mat-icon>create</mat-icon></button>
+                        </mat-card-header>
+                    </mat-card>
+                </mat-grid-tile>
+            </div>
+        </div>
+    </mat-grid-list>
 </div>
-
-<ul>
-    <li *ngFor="let aCenter of centers"
-    [ngClass]="selected==aCenter ? 'selected' : ''">
-    
-    <button
-        (click)="selectCenter(aCenter)">
-        {{aCenter.name}}, {{aCenter.address}}, {{aCenter.city}}
-    </button>  
-    <button (click)="deleteVaccinationCenter(aCenter)">Effacer</button>  
-    </li>
-</ul>
-
-
-
-<h3>Ajouter un centre ci-dessous : </h3>
-<form (ngSubmit)="addCenter()"> 
-    <div>
-      <label for="name">Nom :</label>
-      <input type="string" id="name" [(ngModel)]="newCenter.name" name="name" required>
-    </div>  
-    
-    <div>
-      <label for="address">Adresse :</label>
-      <input type="string" id="address" [(ngModel)]="newCenter.address" name="address" required>
-    </div>
-
-    <div>
-        <label for="city">Ville :</label>
-        <input type="string" id="city" [(ngModel)]="newCenter.city" name="city" required>
-    </div>
-  
-    <button type="submit" routerLink="/superadmin/{{id}}">Ajouter le centre</button>
-</form>
-
-
-
-

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VaccinationCenter } from '../model/vaccination-center';
+import { VaccinationCenter } from '../model/vaccination-center.model';
 import { VaccinationService } from '../services/vaccination.service';
 
 
@@ -22,10 +22,7 @@ export class VaccinationCenterListComponent implements OnInit {
     });
   }
 
-  selectCenter(aCenter: VaccinationCenter): void {
-    this.selected = aCenter;
-  }
-
+  // Recherche des centres de vaccination par nom, ville ou code postal
   handleSearch(event: VaccinationCenter[]){
     this.centers = event;
   }

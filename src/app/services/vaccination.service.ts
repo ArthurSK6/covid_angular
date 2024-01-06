@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { VaccinationCenter } from '../model/vaccination-center';
+import { VaccinationCenter } from '../model/vaccination-center.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -8,56 +8,82 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class VaccinationService {
 
-  private apiUrl = "/api/centre";
+  private apiUrlpublic = "/api/public/centre";
+  private apiUrladmin = "/api/admin/centre";
+  private apiUrlsuperadmin = "/api/superadmin/centre";
   
   constructor(private http: HttpClient) { }
 
   // Récupérer tous les centres
   getAllVaccinationCenters() : Observable<VaccinationCenter[]>{
-    return this.http.get<VaccinationCenter[]>(`${this.apiUrl}/all`);
+    return this.http.get<VaccinationCenter[]>(`${this.apiUrlpublic}/all`, {
+      withCredentials: true,
+      responseType: 'json'
+    });
   }
 
   // Récupérer tous les centres par id
-  getVaccinationCenterById(id :Number) : Observable<VaccinationCenter>{
-    return this.http.get<VaccinationCenter>(`${this.apiUrl}/id/${id}`);
+  getVaccinationCenterById(id :Number) : Observable<VaccinationCenter | undefined>{
+    return this.http.get<VaccinationCenter>(`${this.apiUrlpublic}/id/${id}`, {
+      withCredentials: true,
+      responseType: 'json'
+    });
   }
 
   // Récupérer tous les centres par nom
-  getAllVaccinationCentersByName(name :String) : Observable<VaccinationCenter>{
-    return this.http.get<VaccinationCenter>(`${this.apiUrl}/name/${name}`);
+  getVaccinationCenterByName(name :String) : Observable<VaccinationCenter | undefined>{
+    return this.http.get<VaccinationCenter>(`${this.apiUrlpublic}/name/${name}`, {
+      withCredentials: true,
+      responseType: 'json'
+    });
   }
 
   // Récupérer tous les centres par ville
-  getAllVaccinationCentersByCity(city: string): Observable<VaccinationCenter[]> {
-    return this.http.get<VaccinationCenter[]>(`${this.apiUrl}/city/${city}`);
+  getAllVaccinationCentersByCity(city: string): Observable<VaccinationCenter[] | undefined> {
+    return this.http.get<VaccinationCenter[]>(`${this.apiUrlpublic}/city/${city}`, {
+      withCredentials: true,
+      responseType: 'json'
+    });
   }
 
   // Lier un utilisateur à un centre
-  linkUserToCenter(idUser: number, nameCenter: string): Observable<VaccinationCenter> {
+  linkUserToCenter(idUser: number, idCenter: number): Observable<boolean> {
     const params = new HttpParams()
       .set('idUser', idUser.toString())
-      .set('idCenter', nameCenter.toString());
+      .set('idCenter', idCenter.toString());
   
-    return this.http.put<VaccinationCenter>(`${this.apiUrl}/utilisateur/add`, null, { params });
+    return this.http.put<boolean>(`${this.apiUrladmin}/utilisateur/add`, null, { params, withCredentials: true, responseType: 'json' });
   }
   
   // Récupérer tous les utilisateurs d'un centre de vaccination
-  getAllUsersByCenter(name: string): Observable<VaccinationCenter> {
-    return this.http.get<VaccinationCenter>(`${this.apiUrl}/utilisateur/${name}`);
+  getAllUsersByCenter(name: string): Observable<VaccinationCenter | undefined> {
+    return this.http.get<VaccinationCenter>(`${this.apiUrladmin}/utilisateur/${name}`, {
+      withCredentials: true,
+      responseType: 'json'
+    });
   }
 
   // Ajouter un centre
   addVaccinationCenter(center: VaccinationCenter): Observable<VaccinationCenter> {
-    return this.http.post<VaccinationCenter>(`${this.apiUrl}/add`, center);
+    return this.http.post<VaccinationCenter>(`${this.apiUrlsuperadmin}/add`, center, {
+      withCredentials: true,
+      responseType: 'json'
+    });
   }
 
   // Supprimer un centre
-  deleteVaccinationCenter(name: string): Observable<VaccinationCenter> {
-    return this.http.delete<VaccinationCenter>(`${this.apiUrl}/delete/${name}`);
+  deleteVaccinationCenter(idCenter : number): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.apiUrlsuperadmin}/delete/${idCenter}`, {
+      withCredentials: true,
+      responseType: 'json'
+    });
   }
 
-  /*
-  createBooking(book: Booking): Observable<Booking>{
-    return this.http.post("api/public/booking",book);
-  }*/
+  // Modifier un centre
+  updateVaccinationCenter(center: VaccinationCenter): Observable<VaccinationCenter | undefined> {
+    return this.http.put<VaccinationCenter>(`${this.apiUrlsuperadmin}/update`, center, {
+      withCredentials: true,
+      responseType: 'json'
+    });
+  }
 }

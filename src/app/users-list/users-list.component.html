@@ -1,0 +1,25 @@
+<div>
+    <mat-table *ngIf="users && role" [dataSource]="users">
+        <!-- Colonne de la liste des personnes -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>{{role}}</mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{ user.prenom }} {{ user.nom }}</mat-cell>
+        </ng-container>
+
+        <!-- Colonne des boutons (modifier et supprimer du centre) -->
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef >Actions</mat-header-cell>
+            <mat-cell *matCellDef="let user">
+                <button mat-icon-button *ngIf="idUser!=user.id" (click)="editUser(user.id)">
+                <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="idCenter" (click)="deleteUserFromCenter(user.id)">
+                <mat-icon>delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['name', 'actions']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['name', 'actions']"></mat-row>
+    </mat-table>
+</div>

@@ -1,1 +1,42 @@
-<p>admin-centre works!</p>
+<div *ngIf="vaccinationCenter.id">
+
+    <mat-card class="centre-vaccination">
+        <mat-card-header>
+            <mat-card-title>{{ vaccinationCenter.name }} </mat-card-title>
+            <mat-card-subtitle>{{ vaccinationCenter.address }}, {{ vaccinationCenter.postalCode }} {{ vaccinationCenter.city }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <mat-tab-group dynamicHeight *ngIf="vaccinationCenter.id">
+                <mat-tab label="Liste des Docteurs affectés au centre :"> 
+                    <button mat-raised-button color="primary" aria-label="Add-User" class="Add-User" (click)="addUser()">Creer un nouvel utilisateur</button>
+
+                    <mat-form-field>
+                        <mat-select placeholder="Ajouter un Docteur" (keyup.enter)="addUserToCenter()" [(ngModel)]="idUserToAdd">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let user of docUsers" [value]="user.id">{{ user.prenom }} {{ user.nom }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <button mat-icon-button (click)="addUserToCenter()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    
+                    <app-users-list [users]="docUsersCenter" [role]="'DOCTOR'" [idCenter]="vaccinationCenter.id"></app-users-list> 
+                </mat-tab>
+            </mat-tab-group>    
+        </mat-card-content>
+    </mat-card>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

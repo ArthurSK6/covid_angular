@@ -1,22 +1,112 @@
-<body>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field>
-          <input matInput placeholder="Email" formControlName="email" />
-        </mat-form-field>
-      
-        <br /> <!-- Ajout d'un retour à la ligne -->
-      
-        <mat-form-field>
-          <input matInput type="password" placeholder="Password" formControlName="password" />
-        </mat-form-field>
-      
-        <br /> <!-- Ajout d'un retour à la ligne -->
-      
-        <button mat-raised-button color="primary" type="submit">Login</button>
-    </form>
-</body>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Connexion</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="alert alert-danger" *ngIf="errorMessage">
+            <p>{{ errorMessage }}</p>
+          </div>
+          <form #formLogin="ngForm" (ngSubmit)="onSubmitLogin(formLogin)">
+            <mat-form-field class="mb-3 form-field" appearance="fill">
+              <mat-label>Adresse mail</mat-label>
+              <input
+                matInput
+                type="email"
+                id="email"
+                placeholder="Adresse mail"
+                ngModel
+                #email="ngModel"
+                name="email"
+                required
+                email
+              />
+              <mat-error *ngIf="email.errors && formLogin.submitted">Adresse mail valide requise!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mb-3 form-field" appearance="fill">
+              <mat-label>Mot de passe</mat-label>
+              <input
+                matInput
+                type="password"
+                id="password"
+                placeholder="Mot de passe"
+                ngModel
+                #password="ngModel"
+                name="password"
+                required
+                minlength="6"
+              />
+              <mat-error *ngIf="password.errors  && formLogin.submitted && password.errors['required']">Mot de passe requis!</mat-error>
+              <mat-error *ngIf="password.errors  && formLogin.submitted && password.errors['minlength']">Doit contenir au moins 8 caractères</mat-error>
+            </mat-form-field>
+
+            <button type="submit" mat-raised-button color="primary" class="button-login">Login</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
 
 
 
 
 
+
+<!-- 
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Login</h4>
+          <div class="alert alert-danger" *ngIf="errorMessage">
+            <p>{{errorMessage}}</p>
+          </div>
+          <form #formLogin="ngForm" (ngSubmit)="onSubmitLogin(formLogin)">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Email Address"
+                ngModel
+                #email="ngModel"
+                name="email"
+                required
+                email>
+              <div *ngIf="email.errors && formLogin.submitted" class="text-danger">
+                Email is required!
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Password"
+                ngModel
+                #password="ngModel"
+                name="password"
+                required
+                minlength="6">
+                <div *ngIf="password.errors && formLogin.submitted" class="text-danger">
+                  <div *ngIf="password.errors['required']">Password is required</div>
+                  <div *ngIf="password.errors['minlength']" >
+                    Password must be at least 6 characters
+                  </div>
+                </div>
+            </div>
+            <button  type="submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

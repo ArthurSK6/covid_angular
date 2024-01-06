@@ -1,18 +1,36 @@
 <mat-card>
-  <h2>Rechercher votre centre favori :</h2>
-  <app-search-bar class="center-search-bar" (search)="handleSearch($event)"></app-search-bar>
+  <mat-grid-list cols="3" rowHeight="40px">
+    <!-- Recherche du centre -->
+    <mat-grid-tile [colspan]="3">
+      <mat-card-title>Rechercher votre centre favori :</mat-card-title>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="2">
+      <mat-card-subtitle>
+        <app-search-bar class="center-search-bar" (search)="handleSearch($event)"></app-search-bar>
+      </mat-card-subtitle>
+    </mat-grid-tile>
 
-  <div *ngIf="centers.length > 0">
-    <h2>Liste des centres de vaccination disponibles :</h2>
-    <div *ngFor="let aCenter of centers" class="center-card" [ngClass]="{'selected': selected == aCenter}">
-      <div class="center-header">
-        <strong>{{ aCenter.name }}</strong>
+    <!-- Liste des centres -->
+    <div *ngIf="centers.length > 0">
+      <mat-grid-tile [colspan]="3">
+        <mat-card-title >Liste des centres de vaccination disponibles :</mat-card-title>
+      </mat-grid-tile>
+
+      <div *ngFor="let aCenter of centers" class="center-card" [ngClass]="{'selected': selected == aCenter}">
+        <mat-grid-tile [colspan]="1" [rowspan]="4">
+          <mat-card class="centre-vaccination">
+            <mat-card-header>
+              <mat-card-title>{{ aCenter.name }}</mat-card-title>
+              <mat-card-subtitle>{{ aCenter.address }}, {{ aCenter.postalCode }} {{ aCenter.city }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+              <a mat-raised-button color="primary" class="select-button" [routerLink]="'/center/detail/' + aCenter.id">
+                <mat-icon>arrow_forward</mat-icon> Sélectionner {{ aCenter.name }}
+              </a>
+            </mat-card-actions>
+          </mat-card>
+        </mat-grid-tile>
       </div>
-      <div class="center-info">{{ aCenter.address }}, {{ aCenter.postalCode }} {{ aCenter.city }}</div>
-      <a mat-icon-button class="select-button" [routerLink]="'/center/detail/' + aCenter.id">
-        Sélectionner {{aCenter.name}}
-      </a>
-    
     </div>
-  </div>
+  </mat-grid-list>
 </mat-card>
