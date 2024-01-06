@@ -1,0 +1,9 @@
+<div class="personnel-card">
+    <button mat-raised-button color="primary" aria-label="Add-User" (click)="addUser()">Creer un nouvel utilisateur</button>
+</div>
+<mat-tab-group dynamicHeight>
+    <mat-tab label="Super-Administrateurs"> <app-users-list [users]="supadUsers" [role]="'SUPERADMIN'" [isSuperAdmin]="true"></app-users-list> </mat-tab>
+    <mat-tab label="Administrateurs"> <app-users-list [users]="adUsers" [role]="'ADMIN'" [isSuperAdmin]="true"></app-users-list> </mat-tab>
+    <mat-tab label="Docteurs"> <app-users-list [users]="docUsers" [role]="'DOCTOR'" [isSuperAdmin]="true"></app-users-list> </mat-tab>
+</mat-tab-group>
+

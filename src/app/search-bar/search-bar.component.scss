@@ -1,8 +1,11 @@
-.search-button {
-    background-color: #dfad4e;
-    color: #ffffff;
-    //border-radius: 30px;
-    padding: 10px 20px;
-    font-size: 1.1em;
-    width: 120px; /* Ajustez la largeur pour occuper toute la largeur de la carte */
-  }
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Utilisez flex-start pour aligner en haut */
+  flex-wrap: wrap;
+}
+
+.mat-form-field {
+  margin-right: 10px;
+}
+

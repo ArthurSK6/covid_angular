@@ -1,11 +1,23 @@
 :host {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40vh; /* Cela assure que le formulaire est centré verticalement sur la page */
-  }
-  
-  form {
-    width: 300px; /* Ajustez la largeur selon vos besoins */
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  width: 300px; /* Ajustez la largeur selon vos besoins */
+  margin-top: 50px;
+  align-items: center;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.button-login {
+  width: 100%;
+}
+
+
+
+

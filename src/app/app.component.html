@@ -1,6 +1,43 @@
-<div class = "banner">
-    <!-- <h1 class = "title">{{title}}</h1> -->
-    <!-- <h1 class = "title">test</h1> -->
-</div>
+<mat-toolbar>
+    <button mat-icon-button *ngIf="idUser" [matMenuTriggerFor]="menu" aria-label="menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button routerLink="center" mat-menu-item>
+            <mat-icon>home</mat-icon>
+            <span>Accueil</span>
+        </button>
+        <button *ngIf="showSuperAdminBoard" routerLink="superadmin/centres" mat-menu-item>
+            <mat-icon>location_city</mat-icon>
+            <span>Centres</span>
+        </button>
+        <button *ngIf="showAdminBoard && idUserCenter" routerLink="admin" mat-menu-item>
+            <mat-icon>apartment</mat-icon>
+            <span>Mon Centre</span>
+        </button>
+        <button *ngIf="idUserCenter" routerLink="planning" mat-menu-item>
+            <mat-icon>event</mat-icon>
+            <span>Planning</span>
+        </button>
+        <button *ngIf="showSuperAdminBoard" routerLink="superadmin/config" mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Config.</span>
+        </button>
+    </mat-menu>
+    <button mat-icon-button *ngIf="!idUser" routerLink="center">
+        <mat-icon>home</mat-icon>
+    </button>
+    <span>Vaccination Polytech</span>
+    <span class="example-spacer"></span>
+
+    <button *ngIf="!idUser" mat-icon-button routerLink="login">
+        <mat-icon>login</mat-icon>
+    </button>
+    
+    <button  *ngIf="idUser" mat-icon-button (click)="handleLogout()">
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+
+</mat-toolbar>
 
 <router-outlet></router-outlet>

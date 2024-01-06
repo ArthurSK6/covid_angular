@@ -1,0 +1,62 @@
+<!-- Modification d'un user -->
+<div>
+    <mat-grid-list cols="1" rowHeight="35px">
+        <!-- Prénom -->
+        <mat-grid-tile [colspan]="1" [rowspan]="2">
+            <mat-form-field>
+                <mat-label for="prenom">Prenom: </mat-label>
+                <input matInput placeholder="John" type="text" id="prenom" [(ngModel)]="prenom" required />
+                <button matSuffix mat-icon-button aria-label="Clear" *ngIf="prenom" (click)="prenom=''">
+                <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <!-- Nom -->
+        <mat-grid-tile [colspan]="1" [rowspan]="2">
+            <mat-form-field>
+                <mat-label for="nom">Nom: </mat-label>
+                <input matInput placeholder="Doe" type="text" id="nom" [(ngModel)]="nom" required />
+                <button matSuffix mat-icon-button aria-label="Clear" *ngIf="nom" (click)="nom=''">
+                <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <!-- Email -->
+        <mat-grid-tile [colspan]="1" [rowspan]="2">
+            <mat-form-field>
+                <mat-label for="email">Adresse mail: </mat-label>
+                <input matInput placeholder="john@doe.com" type="text" id="email" [(ngModel)]="email" required />
+                <button matSuffix mat-icon-button aria-label="Clear" *ngIf="email" (click)="email=''">
+                <mat-icon>close</mat-icon>
+                </button>
+                <mat-hint>Respecter le format d'un mail</mat-hint>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <!-- Mdp -->
+        <mat-grid-tile [colspan]="1" [rowspan]="3">
+            <mat-form-field>
+                <mat-label for="password">Mot de passe: </mat-label>
+                <input matInput minlength="8" [type]="hide ? 'password' : 'text'" placeholder="password" type="text" id="password" [(ngModel)]="password" required />
+                <button matSuffix mat-icon-button aria-label="Clear" *ngIf="password" (click)="password=''">
+                <mat-icon>close</mat-icon>
+                </button>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-hint>8 carractères minumum dont 1 Majuscule, 1 minuscule, 1 chiffre et 1 carractère spécial</mat-hint>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <!-- Annuler ou Supprimer ou Enregistrer-->
+        <mat-grid-tile [colspan]="1" [rowspan]="2">
+            <button mat-raised-button class="button-actions" color="warn" aria-label="Annuler" (click)="cancel()">Annuler</button>
+            <button mat-raised-button class="button-actions" color="warn" aria-label="Supprimer" *ngIf="user?.id" (click)="supprimer()" >Supprimer</button>
+            <button mat-raised-button color="primary" aria-label="Valider" *ngIf="nom && prenom && email && password" (click)="enregistrer()">Enregistrer</button>
+        </mat-grid-tile>
+        
+    </mat-grid-list>
+</div>
+

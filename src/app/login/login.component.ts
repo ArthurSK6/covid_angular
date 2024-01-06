@@ -1,5 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NgForm} from "@angular/forms";
+import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -7,21 +12,44 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  @Output() login: EventEmitter<{ email: string; password: string }> = new EventEmitter();
+ 
+  errorMessage! : string;
+  AuthUserSub! : Subscription;
 
-  loginForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-    });
+  constructor(private authService : AuthService, private router : Router) {
   }
 
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.login.emit({ email, password });
+  ngOnInit() {
+    this.AuthUserSub = this.authService.AuthenticatedUser$.subscribe({
+      next : user => {
+        if(user) {
+          this.router.navigate(['home']);
+        }
+      }
+    })
+  }
+
+  onSubmitLogin(formLogin: NgForm) {
+    if(!formLogin.valid){
+      return;
     }
+    const email = formLogin.value.email;
+    const password = formLogin.value.password;
+
+    this.authService.login(email, password).subscribe({
+      next : userData => {
+        this.router.navigate(['center']);
+      },
+      error : err => {
+        this.errorMessage = err;
+        console.log(err);
+      }
+
+    })
   }
+  ngOnDestroy() {
+    this.AuthUserSub.unsubscribe();
+  }
+
+  protected readonly console = console;
 }

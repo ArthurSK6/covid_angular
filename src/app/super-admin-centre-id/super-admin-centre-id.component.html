@@ -1,0 +1,91 @@
+<!-- Champ d'édition du centre -->
+<mat-grid-list cols="1" rowHeight="35px">
+
+    <!-- Nom du Center édité -->
+    <mat-grid-tile [colspan]="1">
+        <h1>Edition du centre : <strong>{{ vaccinationCenter.name }}</strong></h1>
+    </mat-grid-tile>
+
+    <!-- Name -->
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <mat-form-field>
+            <mat-label for="name">Nom: </mat-label>
+            <input matInput placeholder="Centre Brabois" type="text" id="name" [(ngModel)]="vaccinationCenter.name" required />
+            <button matSuffix mat-icon-button aria-label="Clear" *ngIf="vaccinationCenter.name" (click)="vaccinationCenter.name=''">
+            <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- Address -->
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <mat-form-field>
+            <mat-label for="address">Adresse: </mat-label>
+            <input matInput placeholder="Rue du Jardin Botanique" type="text" id="address" [(ngModel)]="vaccinationCenter.address" required />
+            <button matSuffix mat-icon-button aria-label="Clear" *ngIf="vaccinationCenter.address" (click)="vaccinationCenter.address=''">
+            <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- Postal Code -->
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <mat-form-field>
+            <mat-label for="postalCode">Code Postal: </mat-label>
+            <input matInput minlength="5" maxlength="5" placeholder="54500" type="text" id="postalCode" [(ngModel)]="vaccinationCenter.postalCode" required />
+            <button matSuffix mat-icon-button aria-label="Clear" *ngIf="vaccinationCenter.postalCode" (click)="vaccinationCenter.postalCode=''">
+            <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- City -->
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <mat-form-field>
+            <mat-label for="city">Ville: </mat-label>
+            <input matInput placeholder="Vandoeuvre-lès-Nancy" type="text" id="city" [(ngModel)]="vaccinationCenter.city" required />
+            <button matSuffix mat-icon-button aria-label="Clear" *ngIf="vaccinationCenter.city" (click)="vaccinationCenter.city=''">
+            <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- Annuler ou Supprimer ou Enregistrer-->
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <button mat-raised-button class="button-actions" color="warn" aria-label="Annuler" (click)="cancelOperation()">Annuler</button>
+        <button mat-raised-button class="button-actions" color="warn" aria-label="Supprimer" *ngIf="vaccinationCenter.id" (click)="deleteCenter()">Supprimer Centre</button>
+        <button mat-raised-button color="primary" aria-label="Enregistrer" *ngIf="vaccinationCenter.name && vaccinationCenter.address && vaccinationCenter.postalCode && vaccinationCenter.city" (click)="enregistrer()">Enregistrer</button>
+    </mat-grid-tile>
+    
+</mat-grid-list>
+
+<!-- Champ de la liste des utilisateurs lié au centre -->
+<mat-tab-group dynamicHeight *ngIf="vaccinationCenter.id">
+    <!-- Adminstrateur du centre -->
+    <mat-tab label="Administrateurs"> 
+        <mat-form-field>
+            <mat-select placeholder="Ajouter un Administrateur" (keyup.enter)="addUserToCenter()" [(ngModel)]="idUserToAdd">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let user of adUsers" [value]="user.id">{{ user.prenom }} {{ user.nom }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button  mat-icon-button (click)="addUserToCenter()">
+            <mat-icon>add</mat-icon>
+        </button>
+        <app-users-list [users]="adUsersCenter" [role]="'ADMIN'" [idCenter]="vaccinationCenter.id" [isSuperAdmin]="true"></app-users-list> 
+    </mat-tab>
+
+    <!-- Docteur du centre -->
+    <mat-tab label="Docteurs"> 
+        <mat-form-field>
+            <mat-select placeholder="Ajouter un Docteur" (keyup.enter)="addUserToCenter()" [(ngModel)]="idUserToAdd">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let user of docUsers" [value]="user.id">{{ user.prenom }} {{ user.nom }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-icon-button (click)="addUserToCenter()">
+            <mat-icon>add</mat-icon>
+        </button>
+        <app-users-list [users]="docUsersCenter" [role]="'DOCTOR'" [idCenter]="vaccinationCenter.id" [isSuperAdmin]="true"></app-users-list> 
+    </mat-tab>
+</mat-tab-group>
